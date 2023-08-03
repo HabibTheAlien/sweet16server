@@ -31,7 +31,7 @@ app.use("/api/posts", postRoute);
 //HOME PAGE RESPONSE
 app.get("/", (req, res) => {
 	res.send(
-		"<div><h1 >Hello world</h1><h2>Hello I am Sweet 16th app server </h2></div>"
+		"<div><h1 >Hello world</h1><h2>Hello I am Sweet16th server </h2></div>"
 	);
 });
 

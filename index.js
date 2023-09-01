@@ -6,6 +6,8 @@ const authRoute = require("./routes/auth");
 const userRoute = require("./routes/user");
 const postRoute = require("./routes/posts");
 const mongoose = require("mongoose");
+const passport = require("passport");
+const googleAuthRoutes = require("./routes/googleAuth");
 
 dotenv.config();
 app.use(express.json());
@@ -24,15 +26,17 @@ mongoose
 		console.log(err);
 	});
 
+app.use(passport.initialize());
+
+app.use("/api/auth", googleAuthRoutes);
+
 app.use("/api/auth", authRoute);
 app.use("/api/users", userRoute);
 app.use("/api/posts", postRoute);
 
 //HOME PAGE RESPONSE
 app.get("/", (req, res) => {
-	res.send(
-		"<div><h1 >Hello world</h1><h2>Hello I am Sweet16th server </h2></div>"
-	);
+	res.send("<div><h1 >Hello world</h1><h2>I am Sweet16th server </h2></div>");
 });
 
 //CLIENT SIDE ERROR

@@ -1,5 +1,4 @@
 const router = require("express").Router();
-const User = require("../models/User");
 const Post = require("../models/Post");
 
 //CREATE POST
@@ -44,10 +43,11 @@ router.delete("/:id", async (req, res) => {
 		const post = await Post.findById(req.params.id);
 		if (post.userId === req.body.userId) {
 			try {
-				await post.delete();
+				await Post.findByIdAndDelete(req.params.id);
 				res.status(200).json("Post has been deleted...");
 			} catch (err) {
 				res.status(500).json(err);
+				console.log(err);
 			}
 		} else {
 			res.status(401).json("You can delete only your post!");
